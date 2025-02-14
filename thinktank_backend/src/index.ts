@@ -10,7 +10,9 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin:"https://think-tank-iu9y.vercel.app/"
+}));
 
 // Signup Route
 app.post("/api/v1/signup", async (req, res) => {
