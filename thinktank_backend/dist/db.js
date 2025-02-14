@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkModel = exports.ContentModel = exports.UserModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-mongoose_1.default.connect("mongodb://127.0.0.1:27017/thinkTank");
+mongoose_1.default.connect("mongodb+srv://trivendra_07:fSK7sDCfhMbnXKa1@cluster0.1zrsr.mongodb.net/brainly");
 const mongoose_2 = require("mongoose");
 const UserSchema = new mongoose_2.Schema({
     username: { type: String, required: true, unique: true },

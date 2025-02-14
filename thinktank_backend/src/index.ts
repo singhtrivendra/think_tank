@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from "express";
 import { ContentModel, LinkModel, UserModel } from "./db";
 import jwt from "jsonwebtoken";
@@ -7,13 +10,22 @@ import { userMiddleware } from "./middleware";
 import { boolean } from "zod";
 import { random } from "./utils";
 import cors from "cors";
+import mongoose from "mongoose";
+// console.log(process.env.MONGO_URL);
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin:"https://think-tank-iu9y.vercel.app/"
-}));
+app.use(cors(
+    { 
+        origin:"https://think-tank-iu9y.vercel.app/",
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 
+app.get("/",(req,res)=>{
+    res.json("hello");
+})
 // Signup Route
 app.post("/api/v1/signup", async (req, res) => {
     const  username = req.body.username;
@@ -174,6 +186,8 @@ console.log(link);
 });
 
 // Start Server
+
+
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
