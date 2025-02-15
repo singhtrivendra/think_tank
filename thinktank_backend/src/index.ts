@@ -10,13 +10,13 @@ import { userMiddleware } from "./middleware";
 import { random } from "./utils";
 import cors from "cors";
 
-
+// console.log(process.env.MONGO_URL);
 
 const app = express();
 app.use(express.json());
 app.use(cors(
     { 
-        origin:"https://think-tank-iu9y.vercel.app/",
+        origin:"https://think-tank-iu9y.vercel.app",
         methods:["POST","GET"],
         credentials:true
     }
