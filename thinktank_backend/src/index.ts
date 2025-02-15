@@ -7,11 +7,10 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {JWT_PASSWORD} from "./config"
 import { userMiddleware } from "./middleware";
-import { boolean } from "zod";
 import { random } from "./utils";
 import cors from "cors";
-import mongoose from "mongoose";
-// console.log(process.env.MONGO_URL);
+
+
 
 const app = express();
 app.use(express.json());

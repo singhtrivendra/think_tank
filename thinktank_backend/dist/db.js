@@ -5,7 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkModel = exports.ContentModel = exports.UserModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
-mongoose_1.default.connect("mongodb+srv://trivendra_07:fSK7sDCfhMbnXKa1@cluster0.1zrsr.mongodb.net/brainly");
+if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL is not defined in the environment variables");
+}
+mongoose_1.default.connect(process.env.MONGO_URL);
 const mongoose_2 = require("mongoose");
 const UserSchema = new mongoose_2.Schema({
     username: { type: String, required: true, unique: true },

@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
-mongoose.connect("mongodb+srv://trivendra_07:fSK7sDCfhMbnXKa1@cluster0.1zrsr.mongodb.net/brainly");
+if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL is not defined in the environment variables");
+}
+mongoose.connect(process.env.MONGO_URL);
 import { model,Schema } from "mongoose";
 
 
