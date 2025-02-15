@@ -1,1 +1,1 @@
-export const BACKEND_URL="https://think-tank-fndq.onrender.com/"
+export const BACKEND_URL="https://think-tank-1.onrender.com"
