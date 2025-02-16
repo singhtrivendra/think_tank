@@ -19,6 +19,7 @@ export function SignUp() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     async function signup() {
         const username = usernameRef.current?.value;
@@ -36,16 +37,17 @@ export function SignUp() {
             return;
         }
 
+        setIsSubmitting(true);
+        
         try {
-            await axios.post(BACKEND_URL + "/api/v1/signup", {
-                username,
-                password,
-            });
+            await axios.post(`${BACKEND_URL}/api/v1/signup`, { username, password });
             alert("You have signed up!");
             navigate("/signin");
         } catch (error) {
-            alert("user already exists")
+            alert("User already exists");
             console.error("Signup failed:", error);
+        } finally {
+            setIsSubmitting(false);
         }
     }
 
@@ -63,9 +65,7 @@ export function SignUp() {
                         placeholder="Username"
                         className="rounded-lg border-gray-300 dark:border-gray-600 focus:ring-primary w-full"
                     />
-                    {errors.username && (
-                        <p className="text-red-500 text-sm mt-1">{errors.username}</p>
-                    )}
+                    {errors.username && <p className="text-red-500 text-sm mt-1">{errors.username}</p>}
                 </div>
 
                 {/* Password Input with Eye Button */}
@@ -83,18 +83,16 @@ export function SignUp() {
                     >
                         {showPassword ? <EyeOff className="w-5 h-5 text-gray-500" /> : <Eye className="w-5 h-5 text-gray-500" />}
                     </button>
-                    {errors.password && (
-                        <p className="text-red-500 text-sm mt-1">{errors.password}</p>
-                    )}
+                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
                 </div>
 
                 {/* Buttons */}
                 <div className="flex flex-col items-center space-y-3">
                     <Button
                         onClick={signup}
-                        loading={false}
+                        loading={isSubmitting}
                         variant="primary"
-                        text="Sign Up"
+                        text={isSubmitting ? "Signing Up..." : "Sign Up"}
                         fullWidth={true}
                         className="w-full"
                     />
