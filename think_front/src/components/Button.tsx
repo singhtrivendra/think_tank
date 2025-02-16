@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 interface ButtonProps {
-  variant: "primary" | "secondary";
+  variant: "primary" | "secondary" ;
   text: string;
   startIcon?: ReactElement;
   onClick?: () => void;

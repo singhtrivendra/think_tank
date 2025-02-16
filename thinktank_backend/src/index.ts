@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     { 
-        origin:"https://think-tank-iu9y.vercel.app",
+        origin:"https://think-tank-iu9y-aqx0fkhv8-trivendras-projects.vercel.app",
         methods:["POST","GET"],
         credentials:true
     }
@@ -59,6 +59,10 @@ app.post("/api/v1/signin", async (req, res) => {
             if (isPasswordValid) {
                 const token = jwt.sign({ id: existingUser._id }, JWT_PASSWORD);
                 res.json({ token });
+            }
+            else{
+                res.status(403).json({ message: "Incorrect Credentials" });
+                return ;
             }
         } else {
             res.status(403).json({ message: "Incorrect Credentials" });
@@ -187,6 +191,6 @@ console.log(link);
 // Start Server
 
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(5174, () => {
+    console.log("Server is running on port 5174");
 });

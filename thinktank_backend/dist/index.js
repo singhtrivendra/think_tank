@@ -63,6 +63,10 @@ app.post("/api/v1/signin", (req, res) => __awaiter(void 0, void 0, void 0, funct
                 const token = jsonwebtoken_1.default.sign({ id: existingUser._id }, config_1.JWT_PASSWORD);
                 res.json({ token });
             }
+            else {
+                res.status(403).json({ message: "Incorrect Credentials" });
+                return;
+            }
         }
         else {
             res.status(403).json({ message: "Incorrect Credentials" });
@@ -175,6 +179,6 @@ app.get("/api/v1/brain/:shareLink", (req, res) => __awaiter(void 0, void 0, void
     });
 }));
 // Start Server
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(5174, () => {
+    console.log("Server is running on port 5174");
 });

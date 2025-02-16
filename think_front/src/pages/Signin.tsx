@@ -46,6 +46,8 @@ export function Signin() {
             localStorage.setItem("token", jwt);
             navigate("/dashboard");
         } catch (error) {
+            console.log(error)
+            alert("Username or password not correct")
             console.error("Signin failed:", error);
         }
     }
