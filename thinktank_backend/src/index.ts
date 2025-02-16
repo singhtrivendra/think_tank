@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 app.use(cors(
     { 
-        origin:"https://think-tank-iu9y-aqx0fkhv8-trivendras-projects.vercel.app",
+        origin:"https://think-tank-iu9y.vercel.app",
         methods:["POST","GET"],
         credentials:true
     }
