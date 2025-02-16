@@ -1,18 +1,19 @@
 import { DashBoard } from "./pages/dashboard";
 import { Signin } from "./pages/Signin";
 
-import { BrowserRouter,Route, Routes } from "react-router-dom";
+import { HashRouter,Route, Routes } from "react-router-dom";
 import { SignUp } from "./pages/Signup";
+import LandingPage from "./pages/LandingPage";
 
 function App(){
-  return <BrowserRouter>
+  return <HashRouter>
   <Routes>
-    <Route path="/" element={<SignUp/>}/>
+    <Route path="/" element={<LandingPage/>}/>
     <Route path="/Signup" element={<SignUp/>} />
     <Route path="/Signin" element={<Signin/>} />
     <Route path="/dashboard" element={<DashBoard/>} />
   </Routes>
-  </BrowserRouter>
+  </HashRouter>
 
 }
 
