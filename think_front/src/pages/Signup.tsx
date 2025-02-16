@@ -44,6 +44,7 @@ export function SignUp() {
             alert("You have signed up!");
             navigate("/signin");
         } catch (error) {
+            alert("user already exists")
             console.error("Signup failed:", error);
         }
     }
