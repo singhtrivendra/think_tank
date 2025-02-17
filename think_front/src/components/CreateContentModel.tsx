@@ -7,22 +7,29 @@ import { BACKEND_URL } from "../config";
 
 enum ContentType {
     Youtube = "youtube",
-    Twitter = "twitter"
+    Twitter = "twitter",
+    Notes = "notes",
+    Links = "links",
+    Tags = "tags"
 }
+
 
 // Controlled Component
 export function CreateContentModel({ open, onClose }: { open: boolean; onClose: () => void }) {
     const titleRef = useRef<HTMLInputElement>(null);
     const linkRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLTextAreaElement | null>(null);
     const [type, setType] = useState(ContentType.Youtube);
 
     async function addContent() {
         const title = titleRef.current?.value;
         const link = linkRef.current?.value;
+        const description = descriptionRef.current?.value;
 
         await axios.post(`${BACKEND_URL}/api/v1/content`, {
             link,
             title,
+            description,
             type
         }, {
             headers: {
@@ -56,13 +63,18 @@ export function CreateContentModel({ open, onClose }: { open: boolean; onClose: 
 
                 {/* Input Fields */}
                 <div className="space-y-4 mt-4">
-                    <Input reference={titleRef} placeholder="Title" className="w-full" />
-                    <Input reference={linkRef} placeholder="Link" className="w-full" />
+                    {type == "notes"  ? <div><Input reference={titleRef} placeholder="Title" className="w-full" />
+                        <textarea ref={descriptionRef} className="px-4 py-2 border rounded m-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all w-full" placeholder="Description" rows={3}></textarea></div> :
+                        <div><Input reference={titleRef} placeholder="Title" className="w-full" />
+                            <Input reference={linkRef} placeholder="Link" className="w-full" />
+                            <textarea ref={descriptionRef} className="px-4 py-2 border rounded m-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all w-full" placeholder="Description" rows={3}></textarea></div>}
                 </div>
 
                 {/* Content Type Selection */}
                 <div className="mt-4">
                     <h3 className="text-sm font-medium text-gray-700 dark:text-gray-300">Select Type</h3>
+                    <div>
+                    <div>
                     <div className="flex gap-2 mt-2 justify-center">
                         <Button
                             text="YouTube"
@@ -74,6 +86,27 @@ export function CreateContentModel({ open, onClose }: { open: boolean; onClose: 
                             variant={type === ContentType.Twitter ? "primary" : "secondary"}
                             onClick={() => setType(ContentType.Twitter)}
                         />
+                        <Button
+                            text="Notes"
+                            variant={type === ContentType.Notes ? "primary" : "secondary"}
+                            onClick={() => setType(ContentType.Notes)}
+                        />
+                        </div>
+                        <div>
+                         <div className="flex gap-2 mt-2 justify-center">
+                        <Button
+                            text="Links"
+                            variant={type === ContentType.Links ? "primary" : "secondary"}
+                            onClick={() => setType(ContentType.Links)}
+                        />
+                        <Button
+                            text="Tags"
+                            variant={type === ContentType.Tags ? "primary" : "secondary"}
+                            onClick={() => setType(ContentType.Tags)}
+                        />
+                        </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
 

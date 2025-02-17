@@ -1,6 +1,4 @@
 import dotenv from 'dotenv';
-dotenv.config();
-
 import express from "express";
 import { ContentModel, LinkModel, UserModel } from "./db";
 import jwt from "jsonwebtoken";
@@ -10,21 +8,20 @@ import { userMiddleware } from "./middleware";
 import { random } from "./utils";
 import cors from "cors";
 
-// console.log(process.env.MONGO_URL);
+dotenv.config();
 
 const app = express();
 app.use(express.json());
+
 app.use(cors(
     { 
         origin:"https://think-tank-iu9y.vercel.app",
-        methods:["POST","GET"],
+        methods:["POST","GET" , "DELETE"],
         credentials:true
     }
 ));
 
-app.get("/",(req,res)=>{
-    res.json("hello");
-})
+
 // Signup Route
 app.post("/api/v1/signup", async (req, res) => {
     const  username = req.body.username;
@@ -78,10 +75,12 @@ app.post("/api/v1/signin", async (req, res) => {
 app.post("/api/v1/content",userMiddleware, async(req, res) => {
 const link = req.body.link;
 const type = req.body.type;
+const description = req.body.description;
 await ContentModel.create({
 
     link,
     type,
+    description,
     title:req.body.title,
     // @ts-ignore
     userId:req.userId,
@@ -102,7 +101,7 @@ app.get("/api/v1/content",userMiddleware, async (req, res) => {
 
     res.json({
         content
-    })
+})
 
 });
 

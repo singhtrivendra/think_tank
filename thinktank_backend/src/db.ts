@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
-if (!process.env.MONGO_URL) {
-    throw new Error("MONGO_URL is not defined in the environment variables");
-}
-mongoose.connect(process.env.MONGO_URL);
+
+mongoose.connect("mongodb://localhost:27017/thinkTank").then(()=>{
+    console.log("connect") ; 
+}).catch(()=>{
+    console.log("not connected")
+});
 import { model,Schema } from "mongoose";
 
 
@@ -16,6 +18,7 @@ export const UserModel =  model("User",UserSchema)
 const ContentSchema = new Schema({
     title: String,
     link: String,
+    description: String,
     tags: [{type:mongoose.Types.ObjectId,ref:'Tag'}],
     type:String,
     userId: {type:mongoose.Types.ObjectId,ref:'User',require:true},

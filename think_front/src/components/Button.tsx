@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick?: () => void;
   fullWidth?: boolean;
   loading?: boolean;
-  className?: string; // ✅ Added className prop
+  className?: string;
 }
 
 const variantClasses = {
@@ -25,15 +25,14 @@ export function Button({
   onClick,
   fullWidth,
   loading,
-  className, // ✅ Accept className as a prop
+  className, 
 }: ButtonProps) {
   return (
     <button
       onClick={onClick}
       className={`${variantClasses[variant]} ${defaultStyle} ${
         fullWidth ? "w-full justify-center" : "justify-start"
-      } ${loading ? "opacity-50 cursor-not-allowed" : ""} ${className || ""}`} // ✅ Merge external className
-      disabled={loading}
+      } ${loading ? "opacity-50 cursor-not-allowed" : ""} ${className || ""}`}
     >
       {startIcon && <div className="pr-2">{startIcon}</div>}
       {text}

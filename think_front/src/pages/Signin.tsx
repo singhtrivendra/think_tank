@@ -19,6 +19,7 @@ export function Signin() {
     const navigate = useNavigate();
     const [errors, setErrors] = useState<{ username?: string; password?: string }>({});
     const [showPassword, setShowPassword] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false); // Loading state
 
     async function signin() {
         const username = usernameRef.current?.value;
@@ -36,6 +37,8 @@ export function Signin() {
             return;
         }
 
+        setIsSubmitting(true); // Disable button while signing in
+
         try {
             const response = await axios.post(`${BACKEND_URL}/api/v1/signin`, {
                 username,
@@ -46,9 +49,10 @@ export function Signin() {
             localStorage.setItem("token", jwt);
             navigate("/dashboard");
         } catch (error) {
-            console.log(error)
-            alert("Username or password not correct")
+            alert("Username or password not correct");
             console.error("Signin failed:", error);
+        } finally {
+            setIsSubmitting(false); // Enable button after request completes
         }
     }
 
@@ -96,7 +100,13 @@ export function Signin() {
 
                 {/* Sign In Button */}
                 <div className="flex justify-center pt-4">
-                    <Button onClick={signin} loading={false} variant="primary" text="Sign In" fullWidth={true} />
+                    <Button
+                        onClick={signin}
+                        loading={isSubmitting}
+                        variant="primary"
+                        text={isSubmitting ? "Signing In..." : "Sign In"}
+                        fullWidth={true}
+                    />
                 </div>
 
                 <p className="text-sm text-center text-gray-600 dark:text-gray-400 mt-4">

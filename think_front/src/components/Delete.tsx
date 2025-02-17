@@ -9,7 +9,7 @@ export async function DeleteContent(title:any){
                 title,
             },
             headers: {
-                "Authorization": localStorage.getItem("token")
+                "Authorization": localStorage.getItem("token") 
             }
         })
 
