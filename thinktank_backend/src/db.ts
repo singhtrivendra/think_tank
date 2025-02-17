@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:27017/thinkTank").then(()=>{
-    console.log("connect") ; 
-}).catch(()=>{
-    console.log("not connected")
-});
+if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL environment variable is not defined");
+}
+mongoose.connect(process.env.MONGO_URL);
 import { model,Schema } from "mongoose";
 
 
