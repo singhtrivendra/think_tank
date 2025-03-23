@@ -1,4 +1,4 @@
-# Think Tank - A Smart Content Organizer 
+![image](https://github.com/user-attachments/assets/6426376b-ffbc-4a49-956d-0a642a0d70eb)# Think Tank - A Smart Content Organizer 
 # Go to Website:- https://think-tank-iu9y.vercel.app/
 
 ## Introduction
@@ -24,7 +24,10 @@ In the modern digital age, information is spread across various platforms like T
 - **Database:** MongoDB
 
 ScreenShots:- 
-![Uploading image.png…]()
+
+![image](https://github.com/user-attachments/assets/004121eb-4f8d-4374-8ab3-13080e9dc7fe)
+
+
 
 ## Setup Instructions
 
