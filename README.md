@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/6426376b-ffbc-4a49-956d-0a642a0d70eb)# Think Tank - A Smart Content Organizer 
+# Think Tank - A Smart Content Organizer 
 # Go to Website:- https://think-tank-iu9y.vercel.app/
 
 ## Introduction
